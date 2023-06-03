@@ -8,40 +8,42 @@
 namespace ariel
 {
     using namespace std;
-
+    // User-defined container classthat can store integers representing mystical elements
     class MagicalContainer
     {
+
+        // Each iterator should support some basic operation.
         class Iterator
         {
         public:
             int *currElement;
-            Iterator();
-            virtual ~Iterator() = default;
-            virtual int &operator*() = 0;
-            virtual Iterator &operator++() = 0;
-            virtual std::vector<int>::iterator begin() = 0;
-            virtual std::vector<int>::iterator end() = 0;
-
-            Iterator(const Iterator &other) = delete;
-            Iterator &operator=(const Iterator &other) = delete;
-            Iterator(Iterator &&other) noexcept = delete;
-            Iterator &operator=(Iterator &&other) noexcept = delete;
+            Iterator();                               // Default constructor
+            Iterator(const Iterator &other) = delete; // Copy constructor
+            virtual ~Iterator() = default;            // Destructor
+                                                      // Assignment operator????
+            Iterator &operator=(const Iterator &other) = delete;// Equality comparison (operator==)
+            // Inequality comparison (operator!=)
+            virtual int &operator*() = 0;                   // Dereference operator (operator*)
+            virtual Iterator &operator++() = 0;             // Pre-increment operator (operator++)
+            virtual std::vector<int>::iterator begin() = 0; // Returns the appropriate iterator pointing to the first element of the container based on the specified type.
+            virtual std::vector<int>::iterator end() = 0;   // Returns the appropriate iterator pointing one position past the last element of the container based on the specified type.
+            Iterator(Iterator &&other) noexcept = delete;            //???
+            Iterator &operator=(Iterator &&other) noexcept = delete; //???
         };
 
     public:
+        // Iterator classes -  scending order.
         class AscendingIterator : public Iterator
         {
         private:
             MagicalContainer *container;
             vector<int> sortedElements;
             int *currElement;
-
         public:
             AscendingIterator();
             AscendingIterator(MagicalContainer &container);
             AscendingIterator(const AscendingIterator &other);
             ~AscendingIterator() override;
-
             AscendingIterator &operator=(const AscendingIterator &other);
             bool operator==(const AscendingIterator &other) const;
             bool operator!=(const AscendingIterator &other) const;
@@ -49,14 +51,13 @@ namespace ariel
             bool operator>(const AscendingIterator &other) const;
             int &operator*() override;
             AscendingIterator &operator++() override;
-
             std::vector<int>::iterator begin() override;
             std::vector<int>::iterator end() override;
-
             AscendingIterator(AscendingIterator &&other) noexcept;
             AscendingIterator &operator=(AscendingIterator &&other) noexcept;
         };
 
+        // Iterator classes that allows traversal of elements in cross order.
         class SideCrossIterator : public Iterator
         {
         private:
@@ -80,11 +81,11 @@ namespace ariel
 
             std::vector<int>::iterator begin() override;
             std::vector<int>::iterator end() override;
-
             SideCrossIterator(SideCrossIterator &&other) noexcept;
             SideCrossIterator &operator=(SideCrossIterator &&other) noexcept;
         };
 
+        // Iterator classes that allows traversal of elements in prime numbers only.
         class PrimeIterator : public Iterator
         {
         private:
@@ -133,10 +134,10 @@ namespace ariel
 
         MagicalContainer();
         ~MagicalContainer();
-        bool addElement(int element);
-        bool removeElement(int element);
+        bool addElement(int element);//adding elements
+        bool removeElement(int element);// removing elements
         std::vector<int> getElements() const;
-        int size() const;
+        int size() const;//retrieving the size of the container
 
         AscendingIterator &getAscendingIterator();
         SideCrossIterator &getSideCrossIterator();
@@ -146,6 +147,6 @@ namespace ariel
         MagicalContainer &operator=(const MagicalContainer &other) = delete;
         MagicalContainer(MagicalContainer &&other) noexcept = delete;
         MagicalContainer &operator=(MagicalContainer &&other) noexcept = delete;
-};
+    };
 }
 #endif
