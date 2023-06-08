@@ -118,152 +118,80 @@ TEST_CASE("AscendingIterator")
         CHECK_EQ(*ascIter1.end(), 3);
     }
 }
-// TEST_CASE("SideCrossIterator")
-// {
-//     MagicalContainer mContainer;
-//     mContainer.addElement(1);
-//     mContainer.addElement(2);
-//     mContainer.addElement(3);
-//     MagicalContainer::SideCrossIterator crossIter1(mContainer);
-//     CHECK_NOTHROW((crossIter1.begin()));
-//     auto it = crossIter1.begin();
-//     CHECK_EQ(*it, 1);
-//     CHECK_NOTHROW((crossIter1.end()));
-//     auto itEnd = crossIter1.end();
-//     CHECK_EQ(*itEnd, 3);
-//     MagicalContainer::SideCrossIterator crossIter2(mContainer);
-//     MagicalContainer mContainer1;
-//     mContainer1.addElement(4);
-//     mContainer1.addElement(5);
-//     mContainer1.addElement(8);
-//     MagicalContainer::SideCrossIterator crossIter3(mContainer1);
 
-//     SUBCASE("Assignment operator")
-//     {
-//     }
-//     SUBCASE("Equality comparison (operator==)")
-//     {
-//         CHECK_NOTHROW(crossIter1.operator==(crossIter2));
-//         CHECK(crossIter1 == crossIter2);    // Self compare
-//         CHECK(!(crossIter1 == crossIter3)); // Differet containers
-//     }
-//     SUBCASE("Inequality comparison (operator!=)")
-//     {
-//         CHECK_NOTHROW(crossIter1.operator!=(crossIter2));
-//         CHECK(!(crossIter1 != crossIter2)); // Self compare
-//         CHECK(crossIter1 != crossIter3);    // Differet containers
-//     }
-//     SUBCASE("GT operator")
-//     {
-//         CHECK_NOTHROW(crossIter1.operator>(crossIter2));
-//         CHECK(!(crossIter1 > crossIter2)); // Self compare
-//         CHECK(crossIter1 > crossIter3);    // Differet containers
-//     }
-//     SUBCASE("LT operator")
-//     {
-//         CHECK_NOTHROW(crossIter1.operator<(crossIter2));
-//         CHECK(!(crossIter1 < crossIter2)); // Self compare
-//         CHECK(!(crossIter1 < crossIter3)); // Differet containers
-//     }
-//     SUBCASE("Dereference operator (operator*)")
-//     {
-//     }
-//     SUBCASE("Pre-increment operator (operator++)")
-//     {
-//         CHECK_NOTHROW((++crossIter1));
-//         ++crossIter1;
-//         CHECK(*crossIter1 == 1);
-//         ++crossIter1;
-//         CHECK(*crossIter1 == 3);
-//         ++crossIter1;
-//         CHECK(*crossIter1 == 2);
-//         ++crossIter1;
-//         ++crossIter1;
-//         CHECK_THROWS_AS(*crossIter1, runtime_error); // after the end
-//     }
-//     SUBCASE("Begin")
-//     {
-//         CHECK_NOTHROW((crossIter1.begin()));
-//         CHECK_EQ(*crossIter1.begin(), 1);
-//     }
-//     SUBCASE("End")
-//     {
-//         CHECK_NOTHROW((crossIter1.end()));
-//         CHECK_EQ(*crossIter1.end(), 2);
-//     }
-// }
 TEST_CASE("PrimeIterator")
 {
     MagicalContainer mContainer;
     mContainer.addElement(1);
     mContainer.addElement(2);
     mContainer.addElement(3);
-    MagicalContainer::PrimeIterator primeIter1(mContainer);
-    CHECK_NOTHROW(primeIter1.begin());
-    auto itBegin = primeIter1.begin();
-    CHECK_EQ(*itBegin, 1);
-    CHECK_NOTHROW(primeIter1.end());
-    auto itEnd = primeIter1.end();
+    MagicalContainer::PrimeIterator primeitr1(mContainer);
+    CHECK_NOTHROW(primeitr1.begin());
+    auto it = primeitr1.begin();
+    CHECK_EQ(*it, 1);
+    CHECK_NOTHROW(primeitr1.end());
+    auto itEnd = primeitr1.end();
     CHECK_EQ(*itEnd, 3);
-    MagicalContainer::PrimeIterator primeIter2(mContainer);
-
+    MagicalContainer::PrimeIterator primeitr2(mContainer);
     MagicalContainer mContainer1;
     mContainer1.addElement(4);
     mContainer1.addElement(5);
     mContainer1.addElement(8);
-    MagicalContainer::PrimeIterator primeIter3(mContainer1);
+    MagicalContainer::PrimeIterator primeitr3(mContainer1);
 
-    SUBCASE("Assignment operator")
+    SUBCASE("Prime Assignment operator")
     {
     }
-    SUBCASE("Equality comparison (operator==)")
+    SUBCASE("Prime Equality comparison (operator==)")
     {
-        CHECK_NOTHROW(primeIter1.operator==(primeIter2));
-        CHECK(primeIter1 == primeIter2);    // Self compare
-        CHECK(!(primeIter1 == primeIter3)); // Differet containers
+        CHECK_NOTHROW(primeitr1.operator==(primeitr2));
+        CHECK(primeitr1 == primeitr2);    // Self compare
+        CHECK(!(primeitr1 == primeitr3)); // Differet containers
     }
-    SUBCASE("Inequality comparison (operator!=)")
+    SUBCASE("Prime Inequality comparison (operator!=)")
     {
-        CHECK_NOTHROW(primeIter1.operator!=(primeIter2));
-        CHECK(!(primeIter1 != primeIter2)); // Self compare
-        CHECK(primeIter1 != primeIter3);    // Differet containers
+        CHECK_NOTHROW(primeitr1.operator!=(primeitr2));
+        CHECK(!(primeitr1 != primeitr2)); // Self compare
+        CHECK((primeitr1 != primeitr3));  // Differet containers
     }
-    SUBCASE("GT operator")
+    SUBCASE("Prime GT operator")
     {
-        CHECK_NOTHROW(primeIter1.operator<(primeIter2));
-        CHECK(!(primeIter1 < primeIter2)); // Self compare
-        CHECK(primeIter1 < primeIter3);    // Differet containers
+
+        CHECK_NOTHROW(primeitr1.operator<(primeitr2));
+        CHECK(!(primeitr1 < primeitr2)); // Self compare
+        CHECK((primeitr1 < primeitr2));  // Differet containers
     }
-    SUBCASE("LT operator")
+    SUBCASE("Prime LT operator")
     {
-        CHECK_NOTHROW(primeIter1.operator>(primeIter2));
-        CHECK(!(primeIter1 > primeIter2)); // Self compare
-        CHECK(!(primeIter1 > primeIter3)); // Differet containers
+        CHECK_NOTHROW(primeitr1.operator>(primeitr2));
+        CHECK(!(primeitr1 > primeitr2)); // Self compare
+        CHECK(!(primeitr1 > primeitr2)); // Differet containers
     }
-    SUBCASE("Dereference operator (operator*)")
+    SUBCASE("Prime Dereference operator (operator*)")
     {
     }
-    SUBCASE("Pre-increment operator (operator++)")
+    SUBCASE("Prime Pre-increment operator (operator++)")
     {
-        CHECK_NOTHROW((++primeIter1));
-        ++primeIter1;
-        CHECK(*primeIter1 == 1);
-        ++primeIter1;
-        CHECK(*primeIter1 == 3);
-        ++primeIter1;
-        CHECK(*primeIter1 == 2);
-        ++primeIter1;
-        ++primeIter1;
-        CHECK_THROWS_AS(*primeIter1, runtime_error); // after the end
+        CHECK_NOTHROW(++primeitr1);
+        ++primeitr1;
+        CHECK(*primeitr1 == 1);
+        ++primeitr1;
+        CHECK(*primeitr1 == 2);
+        ++primeitr1;
+        CHECK(*primeitr1 == 3);
+        ++primeitr1;
+        ++primeitr1;
+        CHECK_THROWS_AS(*primeitr1, runtime_error); // after the end
     }
-    SUBCASE("Begin")
+    SUBCASE("Prime Begin")
     {
-        CHECK_NOTHROW((primeIter1.begin()));
-        CHECK_EQ(*primeIter1.begin(), 1);
+        CHECK_NOTHROW((primeitr1.begin()));
+        CHECK_EQ(*primeitr1.begin(), 1);
     }
-    SUBCASE("End")
+    SUBCASE("Prime End")
     {
-        CHECK_NOTHROW((primeIter1.end()));
-        CHECK_EQ(*primeIter1.end(), 3);
-    }
+        CHECK_NOTHROW((primeitr1.end()));
+        CHECK_EQ(*primeitr1.end(), 3);
+   }
 }
+
