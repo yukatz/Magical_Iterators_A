@@ -3,7 +3,7 @@
 
 namespace ariel
 {
-    //MagicalContainer::Iterator::Iterator() {}
+    // MagicalContainer::Iterator::Iterator() {}
     MagicalContainer::MagicalContainer()
     {
         elements = vector<int>();
@@ -11,7 +11,7 @@ namespace ariel
         sideCrossIterator = SideCrossIterator(*this);
         primeIterator = PrimeIterator(*this);
     }
-    MagicalContainer::~MagicalContainer(){}
+    MagicalContainer::~MagicalContainer() {}
     void MagicalContainer::addElement(int newElement)
     {
         elements.push_back(newElement);
@@ -49,15 +49,15 @@ namespace ariel
     MagicalContainer::AscendingIterator::AscendingIterator() {}
     MagicalContainer::AscendingIterator::AscendingIterator(MagicalContainer &container)
         //: Iterator(), container(&container), sortedElements(container.elements)
-                :  container(&container), sortedElements(container.elements)
+        : container(&container), sortedElements(container.elements)
 
     {
         this->currElement = &sortedElements[0];
     }
 
     MagicalContainer::AscendingIterator::AscendingIterator(const AscendingIterator &other)
-        : container(other.container), sortedElements(other.sortedElements), currElement(other.currElement){}
-    MagicalContainer::AscendingIterator::~AscendingIterator(){}
+        : container(other.container), sortedElements(other.sortedElements), currElement(other.currElement) {}
+    MagicalContainer::AscendingIterator::~AscendingIterator() {}
     MagicalContainer::AscendingIterator &MagicalContainer::AscendingIterator::operator=(const AscendingIterator &other)
     {
         sortedElements = other.sortedElements;
@@ -98,10 +98,17 @@ namespace ariel
     {
         return this->sortedElements.end();
     }
-    MagicalContainer::SideCrossIterator::SideCrossIterator(){}
-    MagicalContainer::SideCrossIterator::SideCrossIterator(MagicalContainer &container){}
-    MagicalContainer::SideCrossIterator::SideCrossIterator(const SideCrossIterator &other){}
-    MagicalContainer::SideCrossIterator::~SideCrossIterator(){}
+    MagicalContainer::SideCrossIterator::SideCrossIterator() {}
+    MagicalContainer::SideCrossIterator::SideCrossIterator(MagicalContainer &container)
+     :  container(&container), sortedElements(container.elements)
+
+    {
+        this->currElement = &sortedElements[0];
+    }
+
+    MagicalContainer::SideCrossIterator::SideCrossIterator(const SideCrossIterator &other)
+        : container(other.container), sortedElements(other.sortedElements), currElement(other.currElement){}
+    MagicalContainer::SideCrossIterator::~SideCrossIterator() {}
     MagicalContainer::SideCrossIterator &MagicalContainer::SideCrossIterator::operator=(const SideCrossIterator &other)
     {
         return *this;
@@ -138,10 +145,15 @@ namespace ariel
     {
         return this->sortedElements.end();
     }
-    MagicalContainer::PrimeIterator::PrimeIterator(){}
-    MagicalContainer::PrimeIterator::PrimeIterator(MagicalContainer &container){}
-    MagicalContainer::PrimeIterator::PrimeIterator(const PrimeIterator &other){}
-    MagicalContainer::PrimeIterator::~PrimeIterator(){}
+    MagicalContainer::PrimeIterator::PrimeIterator() {}
+    MagicalContainer::PrimeIterator::PrimeIterator(MagicalContainer &container)
+        : container(&container), primeElements(container.elements)
+    {
+        this->currElement = &primeElements[0];
+    }
+    MagicalContainer::PrimeIterator::PrimeIterator(const PrimeIterator &other)
+        : container(other.container), primeElements(other.primeElements), currElement(other.currElement) {}
+    MagicalContainer::PrimeIterator::~PrimeIterator() {}
     MagicalContainer::PrimeIterator &MagicalContainer::PrimeIterator::operator=(const PrimeIterator &other)
     {
         return *this;
